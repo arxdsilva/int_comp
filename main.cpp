@@ -114,10 +114,11 @@ char const* animalTree() {
         resp = "jacare\n";
         return resp;
     }
-    cout << "possui esqueleto? [0,1] \n";
-    cin >> consoleResp;
-    if (consoleResp == 1) {
-        // fazer
+    if (ask("possui esqueleto? [0,1] \n") == 1) {
+        if (ask("possui polegar opositor? [0,1] \n") == 1) {
+            resp = "chipanze\n";
+            return resp;
+        }
     }
     cout << "tem asas? [0,1] \n";
     cin >> consoleResp;

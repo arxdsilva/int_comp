@@ -119,6 +119,12 @@ char const* animalTree() {
     if (consoleResp == 1) {
         // fazer
     }
+    cout << "tem asas? [0,1] \n";
+    cin >> consoleResp;
+    if (consoleResp == 1) {
+        return resp;
+    }
+    resp = "pulga\n";
     return resp;
 }
 

@@ -172,5 +172,21 @@ char const* animalTree() {
 
 char const* fruitsTree() {
     char const *resp = "";
+    if (ask("casca e comestivel? [0,1] \n") == 1) {
+        // lala
+    }
+    if (ask("possui liquido livre dentro? [0,1] \n") == 1) {
+        resp = "coco\n";
+        return resp;
+    }
+    if (ask("casca possui coloracao vermelha? [0,1] \n") == 1) {
+        resp = "cacau\n";
+        return resp;
+    }
+    if (ask("De suas sementes é possível a fabricação de chocolate e doces? [0,1] \n") == 1) {
+        resp = "cupuacu\n";
+        return resp;
+    }
+    resp = "inga\n";
     return resp;
 }

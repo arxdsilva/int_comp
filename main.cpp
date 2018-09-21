@@ -229,7 +229,52 @@ char const* fruitsTree() {
             resp = "laranja\n";
             return resp;
         }
-        // fazer o 'no'
+        if (ask("sua folha e pontiaguda? [0,1] \n") == 1) {
+            resp = "abacaxi\n";
+            return resp;
+        }
+        if (ask("utilizado por adao na biblia para cobrir suas vergonhas? [0,1] \n") == 1) {
+            resp = "figo\n";
+            return resp;
+        }
+        if (ask("Quando cortado transversamente possui formato de estrela? [0,1] \n") == 1) {
+            resp = "carambola\n";
+            return resp;
+        }
+        if (ask("tem sabor agridoce? [0,1] \n") == 1) {
+            resp = "caja\n";
+            return resp;
+        }
+        if (ask("possui flor hermafrodita? [0,1] \n") == 1) {
+            resp = "biriba\n";
+            return resp;
+        }
+        if (ask("o fruto se desenvolve em um pseudocaule? [0,1] \n") == 1) {
+            resp = "banana\n";
+            return resp;
+        }
+        if (ask("sua poupa e rosa? [0,1] \n") == 1) {
+            resp = "goiaba\n";
+            return resp;
+        }
+        if (ask("pode pesar ate 10kg? [0,1] \n") == 1) {
+            resp = "jaca\n";
+            return resp;
+        }
+        if (ask("possui polpa verde? [0,1] \n") == 1) {
+            resp = "kiwi\n";
+            return resp;
+        }
+        if (ask("considerado em religioes como fruto proibido? [0,1] \n") == 1) {
+            resp = "maca\n";
+            return resp;
+        }
+        if (ask("possui polpa vermelha? [0,1] \n") == 1) {
+            resp = "caqui\n";
+            return resp;
+        }
+        resp = "jambo\n";
+        return resp;
     }
     if (ask("possui liquido livre dentro? [0,1] \n") == 1) {
         resp = "coco\n";

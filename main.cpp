@@ -173,7 +173,19 @@ char const* animalTree() {
 char const* fruitsTree() {
     char const *resp = "";
     if (ask("casca e comestivel? [0,1] \n") == 1) {
-        // lala
+        if (ask("e considerada uma fruta vermelha? [0,1] \n") == 1) {
+            // lala
+        }
+        if (ask("possui somente 1 semente? [0,1] \n") == 1) {
+            if (ask("possui somente 1 semente? [0,1] \n") == 1) {
+                if (ask("sua casca e verde? [0,1] \n") == 1) {
+                    resp = "abacate\n";
+                    return resp;
+                }
+                resp = "araticum\n";
+                return resp;
+            }
+        }
     }
     if (ask("possui liquido livre dentro? [0,1] \n") == 1) {
         resp = "coco\n";

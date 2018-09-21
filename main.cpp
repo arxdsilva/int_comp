@@ -14,7 +14,7 @@ int main() {
     cout << "Escolha um item das duas listas abaixo, tentaremos advinhar qual foi:\n\n";
     printAnimalList();
     printFruitsList();
-
+    brain();
     return 0;
 }
 
@@ -22,7 +22,6 @@ int ask(char const question[]) {
     int response = 0;
     cout << question;
     cin >> response;
-    cout << response;
     return response;
 }
 
@@ -39,7 +38,7 @@ void printFruitsList() {
 }
 
 void brain(){
-    char const *animalOrFruitQuestion = "possui patas? [0,1] | onde 0 = falso e 1 = verdadeiro";
+    char const *animalOrFruitQuestion = "se movimenta ativamente durante sua vida?? [0,1] | onde 0 = falso e 1 = verdadeiro";
     char const *finalResp = "";
     int resp = ask(animalOrFruitQuestion);
     if (resp == 1) {
@@ -54,6 +53,50 @@ void brain(){
 
 char const* animalTree() {
     char const *resp = "";
+    int consoleResp = 0;
+    cout << "nada durante toda sua vida? [0,1] \n";
+    cin >> consoleResp;
+    if (consoleResp == 1) {
+        cout << "possui guelras? [0,1] \n";
+        cin >> consoleResp;
+        if (consoleResp == 1) {
+            resp = "tubarao\n";
+            return resp;
+        }
+        cout << "caca em grupo? [0,1] \n";
+        cin >> consoleResp;
+        if (consoleResp == 1) {
+            resp = "orca\n";
+            return resp;
+        }
+        cout << "Pode ser encontrado em rios? [0,1] \n";
+        cin >> consoleResp;
+        if (consoleResp == 1) {
+            resp = "lontra\n";
+            return resp;
+        }
+        resp = "baleia\n";
+        return resp;
+    } else {
+        cout << "possui asas? [0,1] \n";
+        cin >> consoleResp;
+        if (consoleResp == 1) {
+            cout << "voa? [0,1] \n";
+            cin >> consoleResp;
+            if (consoleResp == 1) {
+                resp = "urubu\n";
+                return resp;
+            }
+            cout << "pode ser considerado animal domestico? [0,1] \n";
+            cin >> consoleResp;
+            if (consoleResp == 1) {
+                resp = "galinha\n";
+                return resp;
+            }
+            resp = "avestruz\n";
+            return resp;
+        }
+    }
     return resp;
 }
 

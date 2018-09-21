@@ -127,6 +127,14 @@ char const* animalTree() {
             resp = "porco\n";
             return resp;
         }
+        if (ask("animal domestico? [0,1] \n") == 1) {
+            if (ask("tem focinho alongado? [0,1] \n") == 1) {
+                resp = "cao\n";
+                return resp;
+            }
+            resp = "gato\n";
+            return resp;
+        }
     }
     if (ask("tem asas? [0,1] \n") == 1) {
         if (ask("convive em uma sociedade organizada? [0,1] \n") == 1) {

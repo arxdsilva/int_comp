@@ -174,7 +174,36 @@ char const* fruitsTree() {
     char const *resp = "";
     if (ask("casca e comestivel? [0,1] \n") == 1) {
         if (ask("e considerada uma fruta vermelha? [0,1] \n") == 1) {
-            // lala
+            if (ask("cresce grudado no tronco da arvore? [0,1] \n") == 1) {
+                resp = "jabuticaba\n";
+                return resp;
+            }
+            if (ask("originaria da asia? [0,1] \n") == 1) {
+                resp = "groselha\n";
+                return resp;
+            }
+            if (ask("original da america central? [0,1] \n") == 1) {
+                resp = "acerola\n";
+                return resp;
+            }
+            if (ask("seu tronco e uma palmeira? [0,1] \n") == 1) {
+                resp = "acai\n";
+                return resp;
+            }
+            if (ask("costuma ser colocado no topo de bolos? [0,1] \n") == 1) {
+                resp = "cereja\n";
+                return resp;
+            }
+            if (ask("precisa ser cultivado em baixas temperaturas? [0,1] \n") == 1) {
+                resp = "framboesa\n";
+                return resp;
+            }
+            if (ask("utilizado para criar oleo para pele? [0,1] \n") == 1) {
+                resp = "bacaba\n";
+                return resp;
+            }
+            resp = "amora\n";
+            return resp;
         }
         if (ask("possui somente 1 semente? [0,1] \n") == 1) {
             if (ask("sua casca e verde? [0,1] \n") == 1) {

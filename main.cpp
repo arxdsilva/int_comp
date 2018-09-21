@@ -38,7 +38,7 @@ void printFruitsList() {
 }
 
 void brain(){
-    char const *animalOrFruitQuestion = "se movimenta ativamente durante sua vida?? [0,1] | onde 0 = falso e 1 = verdadeiro";
+    char const *animalOrFruitQuestion = "se movimenta ativamente durante sua vida?? [0,1] \n onde 0 = falso e 1 = verdadeiro\n";
     char const *finalResp = "";
     int resp = ask(animalOrFruitQuestion);
     if (resp == 1) {

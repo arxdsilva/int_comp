@@ -116,6 +116,16 @@ char const* animalTree() {
                 resp = "girafa\n";
                 return resp;
             }
+            if (ask("possui corcova? [0,1] \n") == 1) {
+                resp = "camelo\n";
+                return resp;
+            }
+            if (ask("tem chifre? [0,1] \n") == 1) {
+                resp = "boi\n";
+                return resp;
+            }
+            resp = "porco\n";
+            return resp;
         }
     }
     if (ask("tem asas? [0,1] \n") == 1) {

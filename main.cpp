@@ -77,25 +77,42 @@ char const* animalTree() {
         }
         resp = "baleia\n";
         return resp;
-    } else {
-        cout << "possui asas? [0,1] \n";
+    }
+    cout << "possui asas? [0,1] \n";
+    cin >> consoleResp;
+    if (consoleResp == 1) {
+        cout << "voa? [0,1] \n";
         cin >> consoleResp;
         if (consoleResp == 1) {
-            cout << "voa? [0,1] \n";
-            cin >> consoleResp;
-            if (consoleResp == 1) {
-                resp = "urubu\n";
-                return resp;
-            }
-            cout << "pode ser considerado animal domestico? [0,1] \n";
-            cin >> consoleResp;
-            if (consoleResp == 1) {
-                resp = "galinha\n";
-                return resp;
-            }
-            resp = "avestruz\n";
+            resp = "urubu\n";
             return resp;
         }
+        cout << "pode ser considerado animal domestico? [0,1] \n";
+        cin >> consoleResp;
+        if (consoleResp == 1) {
+            resp = "galinha\n";
+            return resp;
+        }
+        resp = "avestruz\n";
+        return resp;
+    }
+    cout << "possui escamas? [0,1] \n";
+    cin >> consoleResp;
+    if (consoleResp == 1) {
+        cout << "vive na floresta? [0,1] \n";
+        cin >> consoleResp;
+        if (consoleResp == 1) {
+            resp = "cascavel\n";
+            return resp;
+        }
+        cout << "Possui dentes superiores e inferiores alinhados?? [0,1] \n";
+        cin >> consoleResp;
+        if (consoleResp == 1) {
+            resp = "crocodilo\n";
+            return resp;
+        }
+        resp = "jacare\n";
+        return resp;
     }
     return resp;
 }

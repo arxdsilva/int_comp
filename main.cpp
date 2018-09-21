@@ -177,14 +177,12 @@ char const* fruitsTree() {
             // lala
         }
         if (ask("possui somente 1 semente? [0,1] \n") == 1) {
-            if (ask("possui somente 1 semente? [0,1] \n") == 1) {
-                if (ask("sua casca e verde? [0,1] \n") == 1) {
-                    resp = "abacate\n";
-                    return resp;
-                }
-                resp = "araticum\n";
+            if (ask("sua casca e verde? [0,1] \n") == 1) {
+                resp = "abacate\n";
                 return resp;
             }
+            resp = "araticum\n";
+            return resp;
         }
     }
     if (ask("possui liquido livre dentro? [0,1] \n") == 1) {

@@ -143,6 +143,16 @@ char const* animalTree() {
             resp = "lobo\n";
             return resp;
         }
+        if (ask("hiberna? [0,1] \n") == 1) {
+            resp = "urso\n";
+            return resp;
+        }
+        if (ask("habita as americas? [0,1] \n") == 1) {
+            resp = "onca\n";
+            return resp;
+        }
+        resp = "leopardo\n";
+        return resp;
     }
     if (ask("tem asas? [0,1] \n") == 1) {
         if (ask("convive em uma sociedade organizada? [0,1] \n") == 1) {

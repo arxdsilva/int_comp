@@ -54,60 +54,40 @@ void brain(){
 char const* animalTree() {
     char const *resp = "";
     int consoleResp = 0;
-    cout << "nada durante toda sua vida? [0,1] \n";
-    cin >> consoleResp;
-    if (consoleResp == 1) {
-        cout << "possui guelras? [0,1] \n";
-        cin >> consoleResp;
-        if (consoleResp == 1) {
+    if (ask("nada durante toda sua vida? [0,1] \n") == 1) {
+        if (ask("possui guelras? [0,1] \n") == 1) {
             resp = "tubarao\n";
             return resp;
         }
-        cout << "caca em grupo? [0,1] \n";
-        cin >> consoleResp;
-        if (consoleResp == 1) {
+        if (ask("caca em grupo? [0,1] \n") == 1) {
             resp = "orca\n";
             return resp;
         }
-        cout << "Pode ser encontrado em rios? [0,1] \n";
-        cin >> consoleResp;
-        if (consoleResp == 1) {
+        if (ask("Pode ser encontrado em rios? [0,1] \n") == 1) {
             resp = "lontra\n";
             return resp;
         }
         resp = "baleia\n";
         return resp;
     }
-    cout << "possui asas? [0,1] \n";
-    cin >> consoleResp;
-    if (consoleResp == 1) {
-        cout << "voa? [0,1] \n";
-        cin >> consoleResp;
-        if (consoleResp == 1) {
+    if (ask("possui asas? [0,1] \n") == 1) {
+        if (ask("voa? [0,1] \n") == 1) {
             resp = "urubu\n";
             return resp;
         }
-        cout << "pode ser considerado animal domestico? [0,1] \n";
-        cin >> consoleResp;
-        if (consoleResp == 1) {
+        if (ask("pode ser considerado animal domestico? [0,1] \n") == 1) {
             resp = "galinha\n";
             return resp;
         }
         resp = "avestruz\n";
         return resp;
     }
-    cout << "possui escamas? [0,1] \n";
-    cin >> consoleResp;
-    if (consoleResp == 1) {
-        cout << "vive na floresta? [0,1] \n";
-        cin >> consoleResp;
-        if (consoleResp == 1) {
+    if (ask("possui escamas? [0,1] \n") == 1) {
+        if (ask("vive na floresta? [0,1] \n") == 1) {
             resp = "cascavel\n";
             return resp;
         }
-        cout << "Possui dentes superiores e inferiores alinhados?? [0,1] \n";
-        cin >> consoleResp;
-        if (consoleResp == 1) {
+        if (ask("Possui dentes superiores e inferiores alinhados?? [0,1] \n") == 1) {
             resp = "crocodilo\n";
             return resp;
         }
@@ -120,18 +100,12 @@ char const* animalTree() {
             return resp;
         }
     }
-    cout << "tem asas? [0,1] \n";
-    cin >> consoleResp;
-    if (consoleResp == 1) {
-        cout << "convive em uma sociedade organizada? [0,1] \n";
-        cin >> consoleResp;
-        if (consoleResp == 1) {
+    if (ask("tem asas? [0,1] \n") == 1) {
+        if (ask("convive em uma sociedade organizada? [0,1] \n") == 1) {
             resp = "abelha\n";
             return resp;
         }
-        cout << "costuma se alimentar de sangue humano? [0,1] \n";
-        cin >> consoleResp;
-        if (consoleResp == 1) {
+        if (ask("costuma se alimentar de sangue humano? [0,1] \n") == 1) {
             resp = "mosca\n";
             return resp;
         }

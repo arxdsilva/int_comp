@@ -122,6 +122,19 @@ char const* animalTree() {
     cout << "tem asas? [0,1] \n";
     cin >> consoleResp;
     if (consoleResp == 1) {
+        cout << "convive em uma sociedade organizada? [0,1] \n";
+        cin >> consoleResp;
+        if (consoleResp == 1) {
+            resp = "abelha\n";
+            return resp;
+        }
+        cout << "costuma se alimentar de sangue humano? [0,1] \n";
+        cin >> consoleResp;
+        if (consoleResp == 1) {
+            resp = "mosca\n";
+            return resp;
+        }
+        resp = "barata\n";
         return resp;
     }
     resp = "pulga\n";

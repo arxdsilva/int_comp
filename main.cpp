@@ -135,6 +135,14 @@ char const* animalTree() {
             resp = "gato\n";
             return resp;
         }
+        if (ask("convive em bando? [0,1] \n") == 1) {
+            if (ask("tem juba? [0,1] \n") == 1) {
+                resp = "leao\n";
+                return resp;
+            }
+            resp = "lobo\n";
+            return resp;
+        }
     }
     if (ask("tem asas? [0,1] \n") == 1) {
         if (ask("convive em uma sociedade organizada? [0,1] \n") == 1) {

@@ -5,9 +5,11 @@ using namespace std;
 int ask(char const[]);
 void printAnimalList();
 void printFruitsList();
+void brain();
 
-// main() is where program execution begins.
+
 int main() {
+    cout << "Escolha um item das duas listas abaixo, tentaremos advinhar qual foi:\n\n";
     printAnimalList();
     printFruitsList();
     // char const *pointer_to_nonconst = "string literal";
@@ -33,4 +35,10 @@ void printFruitsList() {
     cout << "\nlista de frutos\n";
     char list[] = "1.abacate\n2.abacaxi\n3.acerola\n4.amora\n5.araticum\n6.bacaba\n7.banana\n8.biriba\n9.cacau\n10.caja\n11.caqui\n12.carambola\n13.cereja\n14.cidra\n15.coco\n16.cupuacu\n17.figo\n18.framboesa\n19.goiaba\n20.groselha\n21.inga\n22.jabuticaba\n23.jaca\n24.jambo\n25.jenipapo\n26.kiwi\n27.laranja\n28.limao\n29.maca\n30.acai\n";
     cout << list;
+}
+
+void brain(){
+    
+    
+    return;
 }

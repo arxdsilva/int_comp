@@ -114,6 +114,11 @@ char const* animalTree() {
         resp = "jacare\n";
         return resp;
     }
+    cout << "possui esqueleto? [0,1] \n";
+    cin >> consoleResp;
+    if (consoleResp == 1) {
+        // fazer
+    }
     return resp;
 }
 

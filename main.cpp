@@ -99,6 +99,24 @@ char const* animalTree() {
             resp = "chipanze\n";
             return resp;
         }
+        if (ask("herbivoro? [0,1] \n") == 1) {
+            if (ask("Encontrado na oceania? [0,1] \n") == 1) {
+                if (ask("quadrupede? [0,1] \n") == 1) {
+                    resp = "panda\n";
+                    return resp;
+                }
+                resp = "canguru\n";
+                return resp;
+            }
+            if (ask("se alimenta de folhas das partes altas das arvores? [0,1] \n") == 1) {
+                if (ask("Possui presas proeminentes? [0,1] \n") == 1) {
+                    resp = "elefante\n";
+                    return resp;
+                }
+                resp = "girafa\n";
+                return resp;
+            }
+        }
     }
     if (ask("tem asas? [0,1] \n") == 1) {
         if (ask("convive em uma sociedade organizada? [0,1] \n") == 1) {

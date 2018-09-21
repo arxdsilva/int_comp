@@ -6,14 +6,15 @@ int ask(char const[]);
 void printAnimalList();
 void printFruitsList();
 void brain();
+char const* animalTree();
+char const* fruitsTree();
 
 
 int main() {
     cout << "Escolha um item das duas listas abaixo, tentaremos advinhar qual foi:\n\n";
     printAnimalList();
     printFruitsList();
-    // char const *pointer_to_nonconst = "string literal";
-    // ask(pointer_to_nonconst);
+
     return 0;
 }
 
@@ -38,7 +39,25 @@ void printFruitsList() {
 }
 
 void brain(){
-    
-    
+    char const *animalOrFruitQuestion = "possui patas? [0,1] | onde 0 = falso e 1 = verdadeiro";
+    char const *finalResp = "";
+    int resp = ask(animalOrFruitQuestion);
+    if (resp == 1) {
+        finalResp = animalTree();
+    } else {
+        finalResp = fruitsTree();
+    }
+    cout << "O animal/fruto escolhido eh:\n";
+    cout << finalResp;
     return;
+}
+
+char const* animalTree() {
+    char const *resp = "";
+    return resp;
+}
+
+char const* fruitsTree() {
+    char const *resp = "";
+    return resp;
 }

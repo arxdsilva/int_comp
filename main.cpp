@@ -184,6 +184,23 @@ char const* fruitsTree() {
             resp = "araticum\n";
             return resp;
         }
+        if (ask("considerada acida? [0,1] \n") == 1) {
+            if (ask("sua casca quando maduro e verde? [0,1] \n") == 1) {
+                resp = "limao\n";
+                return resp;
+            }
+            if (ask("pode pesar mais de 1kg? [0,1] \n") == 1) {
+                resp = "cidra\n";
+                return resp;
+            }
+            if (ask("utilizado como tinta pelos indios? [0,1] \n") == 1) {
+                resp = "jenipapo\n";
+                return resp;
+            }
+            resp = "laranja\n";
+            return resp;
+        }
+        // fazer o 'no'
     }
     if (ask("possui liquido livre dentro? [0,1] \n") == 1) {
         resp = "coco\n";

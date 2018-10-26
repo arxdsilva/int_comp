@@ -2,14 +2,19 @@
 using namespace std;
 #include <stdio.h>
 #include <string.h>
+#include <random>
 
 // struct Robot {
 //     char LastCommand[1];
+//     int lastPosition[][];
 // }
 
-int const size = 20;
+int const size = 10;
+int const barriers = 3;
 void printGrid(int grid[][size]);
+void addObstacles(int grid[][size]);
 int getDestination();
+int seedObstacle();
 
 int main() {
     int grid[size][size];
@@ -23,8 +28,10 @@ int main() {
     int response = 0;
     response = getDestination();
     cout << "Local escolhido: [" << response << "][40] escolhido.\n";
-    grid[response][size] = 1;
+    grid[response][size-1] = 1;
     cout << "Nova grid com a saida: \n";
+    printGrid(grid);
+    addObstacles(grid);
     printGrid(grid);
     return 0;
 }
@@ -48,4 +55,37 @@ int getDestination() {
         response = getDestination();
     }
     return response;
+}
+
+int seedObstacle() {
+    std::random_device rd; // obtain a random number from hardware
+    std::mt19937 eng(rd()); // seed the generator
+    std::uniform_int_distribution<> distr(0, size); // define the range
+    return distr(eng);
+}
+
+void addObstacles(int grid[][size]) {
+    int x= 0;
+    int y= 0;
+    int i= 0;
+    while (i<barriers){
+        x = seedObstacle();
+        y = seedObstacle();
+        if (grid[x][y] == 0) {
+            grid[x][y] = 7;
+            i++;
+            if ((grid[x-1][y] == 0) && ((x-1) > 0)) {
+                grid[x-1][y] = 7;
+            } else {
+                grid[x+1][y] = 7;
+            }
+            if ((grid[x][y-1] == 0) && ((y-1)>0)) {
+                grid[x][y-1] = 7;
+            } else {
+                grid[x][y+1] = 7;
+            }
+        }
+        cout <<"\n"<< x << " >>>> " << y << "\n";
+    }
+    return;
 }

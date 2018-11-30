@@ -5,7 +5,9 @@ using namespace std;
 #include <random>
 #include <fstream>
 #include <string>
+#include <vector>
 #include <unistd.h>
+#include <iomanip>
 
 int population, generations = 0;
 int const size = 300;
@@ -15,6 +17,8 @@ void printInfos();
 void initMaze(int maze[][size]);
 void addObstacles(int maze[][size]);
 void generateMaze(int maze[][size]);
+vector<string> mountGene(vector<string> , int , int);
+
 
 int main() {
     int maze[size][size];
@@ -26,7 +30,24 @@ int main() {
     initMaze(maze);
     // printMaze(maze);
     generateMaze(maze);
+    std::vector<string> genes;
+    genes = mountGene(genes, 0,0);
+    cout << genes.size();
     return 0;
+}
+
+vector<string> mountGene(vector<string> genesV, int x, int y) {
+    std::string xString = std::to_string(x);
+    std::string yString = std::to_string(y);
+    if (xString.size() < 3) {
+        xString = std::string(3-xString.size(), '0').append(xString);
+    }
+    if (yString.size() < 3) {
+        yString = std::string(3-yString.size(), '0').append(yString);
+    }
+    std::string concat = xString + yString;
+    genesV.push_back(concat);
+    return genesV;
 }
 
 void printInfos() {

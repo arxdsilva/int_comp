@@ -8,54 +8,58 @@ using namespace std;
 #include <unistd.h>
 
 int population, generations = 0;
-int size = 300;
-int maze[size][size];
-void printInfos();
-void initMaze();
+int const size = 300;
 int seedObstacle();
-void addObstacles();
+void printMaze(int maze[][size]);
+void printInfos();
+void initMaze(int maze[][size]);
+void addObstacles(int maze[][size]);
+void generateMaze(int maze[][size]);
 
 int main() {
+    int maze[size][size];
     printInfos();
     cout << "entre com a populacao: ";
     cin >> population;
     cout << "entre com o numero de geracoes: ";
     cin >> generations;
-    initMaze();
+    initMaze(maze);
+    printMaze(maze);
     return 0;
 }
 
 void printInfos() {
-    cout << ">> Algoritmo genetico  <<";
-    cout << ">>                     <<";
-    cout << ">> x-over: ponto       <<";
-    cout << ">> %% x-over: 70%%     <<";
-    cout << ">> mutacao: classica   <<";
-    cout << ">> %% mutacao: 5%%     <<";
-    cout << ">>                     <<";
-    cout << ">> init aleatorio      <<";
-    cout << ">> elitismo            <<";
-    cout << ">> torneio             <<";
-    cout << ">> cromossomo: xxxyyy  <<";
+    cout << ">> Algoritmo genetico  <<\n";
+    cout << ">>                     <<\n";
+    cout << ">> x-over: ponto       <<\n";
+    cout << ">> %% x-over: 70%%     <<\n";
+    cout << ">> mutacao: classica   <<\n";
+    cout << ">> %% mutacao: 5%%     <<\n";
+    cout << ">>                     <<\n";
+    cout << ">> init aleatorio      <<\n";
+    cout << ">> elitismo            <<\n";
+    cout << ">> torneio             <<\n";
+    cout << ">> cromossomo: xxxyyy  <<\n";
 }
 
-void generateMaze() {
+void generateMaze(int maze[][size]) {
     int endX, endY = 0;
     cout << "exemplo de labirinto com coordenadas x e y:\n";
-    cout << "       0       1   ..  299";
-    cout << "0      x       x   ..  299";
-    cout << "1      x       x   ..  299";
-    cout << "..     ..      ..         ";
-    cout << "299    299     299        ";
+    cout << "       0       1   ..  299\n";
+    cout << "0      x       x   ..  299\n";
+    cout << "1      x       x   ..  299\n";
+    cout << "..     ..      ..         \n";
+    cout << "299    299     299        \n";
     cout << "\nforneca a coordenada (x) do final do labirinto:";
     cin >> endX;
     cout << "\nforneca a coordenada (y) do final do labirinto:";
     cin >> endY;
     maze[0][0] = 1;
     maze[endX][endY] = 3;
+    addObstacles(maze);
 }
 
-void initMaze() {
+void initMaze(int maze[][size]) {
     for ( int i = 0; i < size; i++ ) {
         for ( int j = 0; j < size; j++ ) {
             maze[i][j] = 0;
@@ -70,7 +74,7 @@ int seedObstacle() {
     return distr(eng);
 }
 
-void addObstacles() {
+void addObstacles(int maze[][size]) {
     int x, y, i = 0;
     while (i < 15) {
         x = seedObstacle();
@@ -80,4 +84,15 @@ void addObstacles() {
             i++;
         }
     }
+}
+
+void printMaze(int maze[][size]) {
+    for ( int i = 0; i < size; i++ ) {
+        cout << i << ": ";
+        for ( int j = 0; j < size; j++ ) {
+            cout << " | " << maze[i][j];
+        }
+        cout << "\n";
+    }
+    return;
 }

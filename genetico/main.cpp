@@ -21,6 +21,7 @@ void addObstacles(int grid[][size]);
 int getDestination();
 int seedObstacle();
 void startRobot(int grid[][size], int);
+void printInfos();
 
 int main() {
     int grid[size][size];
@@ -56,16 +57,16 @@ void printGrid(int grid[size][size]) {
 }
 
 void printInfos() {
-    cout << ">> Algoritmo genetico  <<"
-    cout << ">>                     <<"
-    cout << ">> x-over: ponto       <<"
-    cout << ">> %% x-over: 70%%     <<"
-    cout << ">> mutacao: classica   <<"
-    cout << ">> %% mutacao: 5%% <<"
-    cout << ">>                     <<"
-    cout << ">> init aleatorio      <<"
-    cout << ">> elitismo            <<"
-    cout << ">> torneio             <<"
+    cout << ">> Algoritmo genetico  <<";
+    cout << ">>                     <<";
+    cout << ">> x-over: ponto       <<";
+    cout << ">> %% x-over: 70%%     <<";
+    cout << ">> mutacao: classica   <<";
+    cout << ">> %% mutacao: 5%%     <<";
+    cout << ">>                     <<";
+    cout << ">> init aleatorio      <<";
+    cout << ">> elitismo            <<";
+    cout << ">> torneio             <<";
 }
 
 int getDestination() {

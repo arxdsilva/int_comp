@@ -9,8 +9,14 @@ using namespace std;
 #include <unistd.h>
 #include <iomanip>
 
+struct Xsome {
+    string Val;
+    int steps;
+};
+
 int steps = 0;
 int endX, endY = 0;
+int stateX, stateY = 0;
 int population, generations = 0;
 int const size = 300;
 int randomNum();
@@ -20,7 +26,7 @@ void initMaze(int maze[][size]);
 void addObstacles(int maze[][size]);
 void generateMaze(int maze[][size]);
 string mountGene(int , int);
-std::vector<string> inputRandomNodes(std::vector<string>, int [][size]);
+std::vector<Xsome> inputRandomNodes(std::vector<Xsome>, int [][size]);
 
 int main() {
     int maze[size][size];
@@ -32,16 +38,18 @@ int main() {
     initMaze(maze);
     // printMaze(maze);
     generateMaze(maze);
-    std::vector<string> genes;
+    std::vector<Xsome> genes;
     string firstGene = mountGene(0,0);
-    genes.push_back(firstGene);
+    Xsome first = {firstGene, 0}; 
+    genes.push_back(first);
     genes = inputRandomNodes(genes, maze);
     string lastGene = mountGene(endX, endY);
-    genes.push_back(lastGene);
+    Xsome last = {lastGene, 0}; 
+    genes.push_back(last);
     return 0;
 }
 
-std::vector<string> inputRandomNodes(std::vector<string> genes, int maze[][size]) {
+std::vector<Xsome> inputRandomNodes(std::vector<Xsome> genes, int maze[][size]) {
     int x, y, i = 0;
     while(i < 5){
         x = randomNum();
@@ -52,7 +60,8 @@ std::vector<string> inputRandomNodes(std::vector<string> genes, int maze[][size]
         maze[x][y] = 9;
         i++;
         string gene = mountGene(x,y);
-        genes.push_back(gene);
+        Xsome GStruct = {gene, 0}; 
+        genes.push_back(GStruct);
     }
     return genes;
 }

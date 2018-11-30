@@ -8,7 +8,11 @@ using namespace std;
 #include <unistd.h>
 
 int population, generations = 0;
+int size = 300;
+int maze[size][size];
 void printInfos();
+void initMaze();
+
 
 int main() {
     printInfos();
@@ -16,6 +20,7 @@ int main() {
     cin >> population;
     cout << "entre com o numero de geracoes: ";
     cin >> generations;
+    initMaze();
     return 0;
 }
 
@@ -31,4 +36,25 @@ void printInfos() {
     cout << ">> elitismo            <<";
     cout << ">> torneio             <<";
     cout << ">> cromossomo: xxxyyy  <<";
+}
+
+void generateMaze() {
+    int startX, startY = 0;
+    int endX, endY = 0;
+    cout << "exemplo de labirinto com coordenadas x e y:\n";
+    cout << "   0   1";
+    cout << "0  x   x";
+    cout << "1  x   x";
+    cout << "\nforneca a coordenada (x) do final do labirinto:";
+    cin >> endX;
+    cout << "\nforneca a coordenada (y) do final do labirinto:";
+    cin >> endY;
+}
+
+void initMaze() {
+    for ( int i = 0; i < size; i++ ) {
+        for ( int j = 0; j < size; j++ ) {
+            grid[i][j] = 0;
+        }
+    }
 }

@@ -10,7 +10,7 @@ using namespace std;
 #include <iomanip>
 
 struct Xsome {
-    string Val;
+    std::vector<string> Vals;
     int steps;
 };
 
@@ -24,32 +24,97 @@ void printMaze(int maze[][size]);
 void printInfos();
 void initMaze(int maze[][size]);
 void addObstacles(int maze[][size]);
-void generateMaze(int maze[][size]);
+void clearMaze(int maze[][size]);
 string mountGene(int , int);
-std::vector<Xsome> inputRandomNodes(std::vector<Xsome>, int [][size]);
+std::vector<string> inputRandomNodes(std::vector<string>, int [][size]);
+Xsome evaluateXsome(std::vector<string>, int [][size]);
+void walkRight(int [][size], int, int);
+void walkLeft(int [][size], int, int);
+void walkUp(int [][size], int, int);
+void walkDown(int [][size], int, int);
 
 int main() {
     int maze[size][size];
     printInfos();
-    // cout << "entre com a populacao: ";
+    // cout << "entre com a populacao: \n";
     // cin >> population;
-    // cout << "entre com o numero de geracoes: ";
+    // cout << "entre com o numero de geracoes: \n";
     // cin >> generations;
     initMaze(maze);
-    // printMaze(maze);
-    generateMaze(maze);
-    std::vector<Xsome> genes;
+    // clearMaze(maze);
+    // 1 cromossomo
+    std::vector<string> genes;
     string firstGene = mountGene(0,0);
-    Xsome first = {firstGene, 0}; 
-    genes.push_back(first);
+    genes.push_back(firstGene);
     genes = inputRandomNodes(genes, maze);
     string lastGene = mountGene(endX, endY);
-    Xsome last = {lastGene, 0}; 
-    genes.push_back(last);
+    genes.push_back(lastGene);
+    Xsome x = evaluateXsome(genes, maze);
+    cout << x.steps;
     return 0;
 }
 
-std::vector<Xsome> inputRandomNodes(std::vector<Xsome> genes, int maze[][size]) {
+Xsome evaluateXsome(std::vector<string> genes, int maze[][size]){
+    int stateXC = 0;
+    int stateYC = 0;
+    bool keepGoing = true;
+    int stepz = 0;
+    for(int i = 1; i < genes.size(); i++){
+        string destString = genes[i];
+        int destX, destY = 0;
+        destX = atoi(destString.substr(0,3).c_str());
+        destY = atoi(destString.substr(3,6).c_str());
+        while (maze[destX][destY] == 3) {
+            if ((stateXC < destX) && (stateXC+1 < size) && (maze[stateXC+1][stateYC] != 4)) {
+                maze[stateXC][stateYC] = 0;
+                maze[stateXC+1][stateYC] = 1;
+                stateXC += 1;
+                stepz++;
+            } else if ((stateYC < destY) && (stateYC+1 < size) && (maze[stateXC][stateYC+1] != 4)) {
+                maze[stateXC][stateYC] = 0;
+                maze[stateXC][stateYC+1] = 1;
+                stateYC += 1;
+                stepz++;
+            } else if ((stateXC > destX) && (stateXC-1 >= 0) && (maze[stateXC-1][stateYC] != 4)) {
+                maze[stateXC][stateYC] = 0;
+                maze[stateXC-1][stateYC] = 1;
+                stateXC -= 1;
+                stepz++;
+            } else if ((stateYC-1 >= 0) && (maze[stateXC][stateYC+1] != 4)) {
+            // } else {    
+                maze[stateXC][stateYC] = 0;
+                maze[stateXC][stateYC-1] = 1;
+                stateYC -= 1;
+                stepz++;
+            }
+        }
+    }
+    Xsome s = {genes, stepz};
+    return s;
+}
+
+void walkRight(int maze[][size], int x, int y) {
+    maze[x][y] = 0;
+    maze[x+1][y] = 1;
+}
+
+void walkLeft(int maze[][size], int x, int y) {
+    maze[x][y] = 0;
+    maze[x-1][y] = 1;
+}
+
+
+void walkDown(int maze[][size], int x, int y) {
+    maze[x][y] = 0;
+    maze[x][y+1] = 1;
+}
+
+void walkUp(int maze[][size], int x, int y) {
+    maze[x][y] = 0;
+    maze[x][y-1] = 1;
+}
+
+std::vector<string> inputRandomNodes(std::vector<string> genes, int maze[][size]) {
     int x, y, i = 0;
     while(i < 5){
         x = randomNum();
@@ -57,11 +122,10 @@ std::vector<Xsome> inputRandomNodes(std::vector<Xsome> genes, int maze[][size]) 
         if ((maze[x][y] == 3) || (maze[x][y] == 1) || (maze[x][y] == 9)) {
             continue;
         }
-        maze[x][y] = 9;
+        maze[x][y] = 3;
         i++;
         string gene = mountGene(x,y);
-        Xsome GStruct = {gene, 0}; 
-        genes.push_back(GStruct);
+        genes.push_back(gene);
     }
     return genes;
 }
@@ -92,7 +156,18 @@ void printInfos() {
     cout << ">>     cromossomo: xxxyyy      <<\n\n";
 }
 
-void generateMaze(int maze[][size]) {
+void clearMaze(int maze[][size]) {
+    for ( int i = 0; i < size; i++ ) {
+        for ( int j = 0; j < size; j++ ) {
+            maze[i][j] = 0;
+        }
+    }
+    maze[0][0] = 1;
+    maze[endX][endY] = 9;
+    addObstacles(maze);
+}
+
+void initMaze(int maze[][size]) {
     cout << "exemplo de labirinto com coordenadas x e y:\n";
     cout << "       0       1   ..  299\n";
     cout << "0      x       x   ..  299\n";
@@ -103,17 +178,14 @@ void generateMaze(int maze[][size]) {
     cin >> endX;
     cout << "\nforneca a coordenada (y) do final do labirinto:";
     cin >> endY;
-    maze[0][0] = 1;
-    maze[endX][endY] = 3;
-    addObstacles(maze);
-}
-
-void initMaze(int maze[][size]) {
     for ( int i = 0; i < size; i++ ) {
         for ( int j = 0; j < size; j++ ) {
             maze[i][j] = 0;
         }
     }
+    maze[0][0] = 1;
+    maze[endX][endY] = 9;
+    addObstacles(maze);
 }
 
 int randomNum() {
@@ -129,7 +201,7 @@ void addObstacles(int maze[][size]) {
         x = randomNum();
         y = randomNum();
         if (maze[x][y] != 1 && maze[x][y] != 3) {
-            maze[x][y] = 9;
+            maze[x][y] = 4;
             i++;
         }
     }
@@ -139,7 +211,7 @@ void printMaze(int maze[][size]) {
     for ( int i = 0; i < size; i++ ) {
         cout << i << ": ";
         for ( int j = 0; j < size; j++ ) {
-            cout << " | " << maze[i][j];
+            cout << maze[i][j];
         }
         cout << "\n";
     }

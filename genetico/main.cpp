@@ -18,23 +18,41 @@ void initMaze(int maze[][size]);
 void addObstacles(int maze[][size]);
 void generateMaze(int maze[][size]);
 string mountGene(int , int);
-
+std::vector<string> inputRandomNodes(std::vector<string>, int [][size]);
 
 int main() {
     int maze[size][size];
     printInfos();
-    cout << "entre com a populacao: ";
-    cin >> population;
-    cout << "entre com o numero de geracoes: ";
-    cin >> generations;
+    // cout << "entre com a populacao: ";
+    // cin >> population;
+    // cout << "entre com o numero de geracoes: ";
+    // cin >> generations;
     initMaze(maze);
     // printMaze(maze);
     generateMaze(maze);
     std::vector<string> genes;
-    firstGene = mountGene(genes, 0,0);
+    string firstGene = mountGene(0,0);
     genes.push_back(firstGene);
     cout << genes.size();
+    genes = inputRandomNodes(genes, maze);
+    cout << genes.size();
     return 0;
+}
+
+std::vector<string> inputRandomNodes(std::vector<string> genes, int maze[][size]) {
+    int x, y, i = 0;
+    while(i < 5){
+        x = randomNum();
+        y = randomNum();
+        if ((maze[x][y] == 3) || (maze[x][y] == 1) || (maze[x][y] == 9)) {
+            continue;
+        }
+        maze[x][y] = 9;
+        i++;
+        string gene = mountGene(x,y);
+        genes.push_back(gene);
+    }
+    return genes;
 }
 
 string mountGene(int x, int y) {
@@ -46,8 +64,7 @@ string mountGene(int x, int y) {
     if (yString.size() < 3) {
         yString = std::string(3-yString.size(), '0').append(yString);
     }
-    std::string concat = xString + yString;
-    return genesV;
+    return xString + yString;
 }
 
 void printInfos() {

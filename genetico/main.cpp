@@ -24,22 +24,23 @@ int main() {
     cout << "entre com o numero de geracoes: ";
     cin >> generations;
     initMaze(maze);
-    printMaze(maze);
+    // printMaze(maze);
+    generateMaze(maze);
     return 0;
 }
 
 void printInfos() {
-    cout << ">> Algoritmo genetico  <<\n";
-    cout << ">>                     <<\n";
-    cout << ">> x-over: ponto       <<\n";
-    cout << ">> %% x-over: 70%%     <<\n";
-    cout << ">> mutacao: classica   <<\n";
-    cout << ">> %% mutacao: 5%%     <<\n";
-    cout << ">>                     <<\n";
-    cout << ">> init aleatorio      <<\n";
-    cout << ">> elitismo            <<\n";
-    cout << ">> torneio             <<\n";
-    cout << ">> cromossomo: xxxyyy  <<\n";
+    cout << ">>     Algoritmo genetico      <<\n";
+    cout << ">>                             <<\n";
+    cout << ">>     x-over: ponto           <<\n";
+    cout << ">>     %% x-over: 70%%         <<\n";
+    cout << ">>     mutacao: classica       <<\n";
+    cout << ">>     %% mutacao: 5%%         <<\n";
+    cout << ">>                             <<\n";
+    cout << ">>     init aleatorio          <<\n";
+    cout << ">>     elitismo                <<\n";
+    cout << ">>     torneio                 <<\n";
+    cout << ">>     cromossomo: xxxyyy      <<\n\n";
 }
 
 void generateMaze(int maze[][size]) {

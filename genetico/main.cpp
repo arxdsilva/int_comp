@@ -12,7 +12,8 @@ int size = 300;
 int maze[size][size];
 void printInfos();
 void initMaze();
-
+int seedObstacle();
+void addObstacles();
 
 int main() {
     printInfos();
@@ -58,6 +59,25 @@ void initMaze() {
     for ( int i = 0; i < size; i++ ) {
         for ( int j = 0; j < size; j++ ) {
             maze[i][j] = 0;
+        }
+    }
+}
+
+int seedObstacle() {
+    std::random_device rd; // obtain a random number from hardware
+    std::mt19937 eng(rd()); // seed the generator
+    std::uniform_int_distribution<> distr(0, 299); // define the range
+    return distr(eng);
+}
+
+void addObstacles() {
+    int x, y, i = 0;
+    while (i < 15) {
+        x = seedObstacle();
+        y = seedObstacle();
+        if (maze[x][y] != 1 && maze[x][y] != 3) {
+            maze[x][y] = 9;
+            i++;
         }
     }
 }

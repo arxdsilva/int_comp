@@ -9,6 +9,8 @@ using namespace std;
 #include <unistd.h>
 #include <iomanip>
 
+int steps = 0;
+int endX, endY = 0;
 int population, generations = 0;
 int const size = 300;
 int randomNum();
@@ -33,9 +35,9 @@ int main() {
     std::vector<string> genes;
     string firstGene = mountGene(0,0);
     genes.push_back(firstGene);
-    cout << genes.size();
     genes = inputRandomNodes(genes, maze);
-    cout << genes.size();
+    string lastGene = mountGene(endX, endY);
+    genes.push_back(lastGene);
     return 0;
 }
 
@@ -82,7 +84,6 @@ void printInfos() {
 }
 
 void generateMaze(int maze[][size]) {
-    int endX, endY = 0;
     cout << "exemplo de labirinto com coordenadas x e y:\n";
     cout << "       0       1   ..  299\n";
     cout << "0      x       x   ..  299\n";

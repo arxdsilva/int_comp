@@ -11,13 +11,13 @@ using namespace std;
 
 int population, generations = 0;
 int const size = 300;
-int seedObstacle();
+int randomNum();
 void printMaze(int maze[][size]);
 void printInfos();
 void initMaze(int maze[][size]);
 void addObstacles(int maze[][size]);
 void generateMaze(int maze[][size]);
-vector<string> mountGene(vector<string> , int , int);
+string mountGene(int , int);
 
 
 int main() {
@@ -31,12 +31,13 @@ int main() {
     // printMaze(maze);
     generateMaze(maze);
     std::vector<string> genes;
-    genes = mountGene(genes, 0,0);
+    firstGene = mountGene(genes, 0,0);
+    genes.push_back(firstGene);
     cout << genes.size();
     return 0;
 }
 
-vector<string> mountGene(vector<string> genesV, int x, int y) {
+string mountGene(int x, int y) {
     std::string xString = std::to_string(x);
     std::string yString = std::to_string(y);
     if (xString.size() < 3) {
@@ -46,7 +47,6 @@ vector<string> mountGene(vector<string> genesV, int x, int y) {
         yString = std::string(3-yString.size(), '0').append(yString);
     }
     std::string concat = xString + yString;
-    genesV.push_back(concat);
     return genesV;
 }
 
@@ -89,7 +89,7 @@ void initMaze(int maze[][size]) {
     }
 }
 
-int seedObstacle() {
+int randomNum() {
     std::random_device rd; // obtain a random number from hardware
     std::mt19937 eng(rd()); // seed the generator
     std::uniform_int_distribution<> distr(0, 299); // define the range
@@ -99,8 +99,8 @@ int seedObstacle() {
 void addObstacles(int maze[][size]) {
     int x, y, i = 0;
     while (i < 15) {
-        x = seedObstacle();
-        y = seedObstacle();
+        x = randomNum();
+        y = randomNum();
         if (maze[x][y] != 1 && maze[x][y] != 3) {
             maze[x][y] = 9;
             i++;

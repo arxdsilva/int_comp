@@ -14,8 +14,8 @@ using namespace std;
 //     int lastPosition[][];
 // }
 unsigned int microseconds =100000;
-int const size = 10;
-int const barriers = 3;
+int const size = 40;
+int const barriers = 5;
 void printGrid(int grid[][size]);
 void addObstacles(int grid[][size]);
 int getDestination();
@@ -82,12 +82,12 @@ void addObstacles(int grid[][size]) {
         if ((grid[x][y] == 0) && (grid[x-1][y]==0) && (grid[x+1][y]==0) && (grid[x][y+1]==0) && (grid[x][y-1]==0) && (x != 0)&& (y != 0)) {
             grid[x][y] = 7;
             i++;
-            if ((grid[x-1][y] == 0) && ((x-1) > 0)) {
+            if ((grid[x-1][y] == 0) && (x > 0)) {
                 grid[x-1][y] = 7;
             } else {
                 grid[x+1][y] = 7;
             }
-            if ((grid[x][y-1] == 0) && (y>0)) {
+            if ((grid[x][y-1] == 0) && (y > 0)) {
                 grid[x][y-1] = 7;
             } else {
                 grid[x][y+1] = 7;

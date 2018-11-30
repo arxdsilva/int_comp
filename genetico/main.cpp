@@ -39,16 +39,19 @@ void printInfos() {
 }
 
 void generateMaze() {
-    int startX, startY = 0;
     int endX, endY = 0;
     cout << "exemplo de labirinto com coordenadas x e y:\n";
-    cout << "   0   1";
-    cout << "0  x   x";
-    cout << "1  x   x";
+    cout << "       0       1   ..  299";
+    cout << "0      x       x   ..  299";
+    cout << "1      x       x   ..  299";
+    cout << "..     ..      ..         ";
+    cout << "299    299     299        ";
     cout << "\nforneca a coordenada (x) do final do labirinto:";
     cin >> endX;
     cout << "\nforneca a coordenada (y) do final do labirinto:";
     cin >> endY;
+    maze[0][0] = 1;
+    maze[endX][endY] = 3;
 }
 
 void initMaze() {

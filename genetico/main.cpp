@@ -36,9 +36,11 @@ Xsome randFromGeneration(std::vector<Xsome>);
 Xsome newXsome(int [][size]);
 void xOver(Xsome, Xsome, int [][size]);
 void setupMazeFromXsome(std::vector<string>, int [][size]);
+void mutate(Xsome, int [][size]);
+string randGene(int [][size]);
 
 
-int main() {
+void main() {
     int maze[size][size];
     printInfos();
     cout << "entre com a populacao: \n";
@@ -65,18 +67,44 @@ int main() {
             cout << ">>     Xsome:"<< better.better.Vals[i] << "            <<";
         }
         cout << ">>     eval: " << better.steps << "         <<";
-        
+        nextGenList.push_back(better);        
         for(int i = 0; i < 2; i++){
             Xsome xs = randFromGeneration(generationList);
             tournamentList.push_back(xs);
         }
-        // x-over
         std::vector<Xsome> xOverList;
         xOver(tournamentList[0], tournamentList[1], maze);
-        
+        mutate(tournamentList[0], maze);
+        mutate(tournamentList[1], maze);
+        nextGenList.push_back(tournamentList[0]);
+        nextGenList.push_back(tournamentList[1]);
     }
-    
-    return 0;
+}
+
+void mutate(Xsome xs, int maze[][size]) {
+    double mutationRate = 0.05;
+    for(int i = 1; i < xs.Vals.size()-1; i++){
+        double mutation = randomNum(0, 100)/100;
+        if (mutation < mutationRate) {
+            string newGene = randGene(maze);
+            xs.Vals[i] = newGene; 
+        }
+    }
+    setupMazeFromXsome(xs.Vals, maze);
+    xs = evaluateXsome(xs.Vals, maze);
+}
+
+string randGene(int maze[][size]) {
+    int x, y, i = 0;
+    while (i == 0) {
+        x = randomNum(0, size -1);
+        y = randomNum(0, size -1);
+        if ((maze[x][y] == 3) || (maze[x][y] == 1) || (maze[x][y] == 9)) {
+            continue;
+        }
+        i++;
+    }
+    return mountGene(x,y);
 }
 
 void xOver(Xsome c1, Xsome c2, int maze[][size]) {

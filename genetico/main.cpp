@@ -20,7 +20,6 @@ int stateX, stateY = 0;
 int population, generations = 0;
 int const size = 300;
 int randomNum(int, int);
-void printMaze(int maze[][size]);
 void printInfos();
 void initMaze(int maze[][size]);
 void addObstacles(int maze[][size]);
@@ -34,7 +33,9 @@ void walkUp(int [][size], int, int);
 void walkDown(int [][size], int, int);
 Xsome betterXsome(std::vector<Xsome>);
 Xsome randFromGeneration(std::vector<Xsome>);
-Xsome newXsome();
+Xsome newXsome(int [][size]);
+void xOver(Xsome, Xsome, int [][size]);
+void setupMazeFromXsome(std::vector<string>, int [][size]);
 
 
 int main() {
@@ -52,7 +53,7 @@ int main() {
         if (i == 0) {
             for(int k = 0; k < population; k++){
                 clearMaze(maze);
-                Xsome xs = newXsome();
+                Xsome xs = newXsome(maze);
                 generationList.push_back(Xsome);
             }
         } else {
@@ -70,12 +71,44 @@ int main() {
             tournamentList.push_back(xs);
         }
         // x-over
+        std::vector<Xsome> xOverList;
+        xOver(tournamentList[0], tournamentList[1], maze);
         
     }
     
-
-    cout << x.steps;
     return 0;
+}
+
+void xOver(Xsome c1, Xsome c2, int maze[][size]) {
+    double xRate = 0.7;
+    double xOverResult = randomNum(0, 100)/100;
+    int xOverPoint = randomNum(1,5);
+    Xsome newC1 = {};
+    Xsome newC2 = {};
+    if (xOverResult < xRate) {
+        for(int i = 0; i < xOverPoint; i++){
+            newC1.push_back(c1.Vals[i]);
+            newC2.push_back(c2.Vals[i]);
+        }
+        for(int i = xOverPoint; i < c1.Vals.size(); i++){
+            newC1.push_back(c2.Vals[i]);
+            newC2.push_back(c1.Vals[i]);
+        }
+        setupMazeFromXsome(newC1.Vals, maze);
+        c1 = evaluateXsome(newC1.Vals, maze);
+        setupMazeFromXsome(newC2.Vals, maze);
+        c2 = evaluateXsome(newC2.Vals, maze);
+    }
+}
+
+void setupMazeFromXsome(std::vector<string> list, int maze[][size]) {
+    clearMaze(maze);
+    for(int i = 1; i < 6; i++){
+        string coordStr = list[i];
+        int x = atoi(coordStr.substr(0,3).c_str());
+        int y = atoi(coordStr.substr(3,6).c_str());
+        maze[x][y] = 3;
+    }
 }
 
 Xsome randFromGeneration(std::vector<Xsome> list) {
@@ -106,7 +139,7 @@ Xsome betterXsome(std::vector<Xsome> Xsomes) {
     return xs;
 }
 
-Xsome newXsome() {
+Xsome newXsome(int maze[][size]) {
     std::vector<string> genes;
     string firstGene = mountGene(0,0);
     genes.push_back(firstGene);
@@ -267,15 +300,4 @@ void addObstacles(int maze[][size]) {
             i++;
         }
     }
-}
-
-void printMaze(int maze[][size]) {
-    for ( int i = 0; i < size; i++ ) {
-        cout << i << ": ";
-        for ( int j = 0; j < size; j++ ) {
-            cout << maze[i][j];
-        }
-        cout << "\n";
-    }
-    return;
 }

@@ -19,7 +19,7 @@ int endX, endY = 0;
 int stateX, stateY = 0;
 int population, generations = 0;
 int const size = 300;
-int randomNum();
+int randomNum(int, int);
 void printMaze(int maze[][size]);
 void printInfos();
 void initMaze(int maze[][size]);
@@ -32,6 +32,10 @@ void walkRight(int [][size], int, int);
 void walkLeft(int [][size], int, int);
 void walkUp(int [][size], int, int);
 void walkDown(int [][size], int, int);
+Xsome betterXsome(std::vector<Xsome>);
+Xsome randFromGeneration(std::vector<Xsome>);
+Xsome newXsome();
+
 
 int main() {
     int maze[size][size];
@@ -60,11 +64,32 @@ int main() {
             cout << ">>     Xsome:"<< better.better.Vals[i] << "            <<";
         }
         cout << ">>     eval: " << better.steps << "         <<";
+        
+        for(int i = 0; i < 2; i++){
+            Xsome xs = randFromGeneration(generationList);
+            tournamentList.push_back(xs);
+        }
+        // x-over
+        
     }
     
 
     cout << x.steps;
     return 0;
+}
+
+Xsome randFromGeneration(std::vector<Xsome> list) {
+    std::vector<Xsome> chosen;
+    int rand1 = 0;
+    int rand2 = 0;
+    while (rand1 == rand2) {
+        int rand1 = randomNum(0, list.size()-1);
+        int rand2 = randomNum(0, list.size()-1);
+    }
+    chosen.push_back(list[rand1]);
+    chosen.push_back(list[rand2]);
+    Xsome xs = betterXsome(chosen);
+    return xs;
 }
 
 Xsome betterXsome(std::vector<Xsome> Xsomes) {
@@ -154,8 +179,8 @@ void walkUp(int maze[][size], int x, int y) {
 std::vector<string> inputRandomNodes(std::vector<string> genes, int maze[][size]) {
     int x, y, i = 0;
     while(i < 5){
-        x = randomNum();
-        y = randomNum();
+        x = randomNum(0, size -1);
+        y = randomNum(0, size -1);
         if ((maze[x][y] == 3) || (maze[x][y] == 1) || (maze[x][y] == 9)) {
             continue;
         }
@@ -183,9 +208,9 @@ void printInfos() {
     cout << ">>     Algoritmo genetico      <<\n";
     cout << ">>                             <<\n";
     cout << ">>     x-over: ponto           <<\n";
-    cout << ">>     %% x-over: 70%%         <<\n";
+    cout << ">>     % x-over: 70%           <<\n";
     cout << ">>     mutacao: classica       <<\n";
-    cout << ">>     %% mutacao: 5%%         <<\n";
+    cout << ">>     % mutacao: 5%           <<\n";
     cout << ">>                             <<\n";
     cout << ">>     init aleatorio          <<\n";
     cout << ">>     elitismo                <<\n";
@@ -225,18 +250,18 @@ void initMaze(int maze[][size]) {
     addObstacles(maze);
 }
 
-int randomNum() {
+int randomNum(int start, int end) {
     std::random_device rd; // obtain a random number from hardware
     std::mt19937 eng(rd()); // seed the generator
-    std::uniform_int_distribution<> distr(0, 299); // define the range
+    std::uniform_int_distribution<> distr(start, end); // define the range
     return distr(eng);
 }
 
 void addObstacles(int maze[][size]) {
     int x, y, i = 0;
     while (i < 15) {
-        x = randomNum();
-        y = randomNum();
+        x = randomNum(0, size -1);
+        y = randomNum(0, size -1);
         if (maze[x][y] != 1 && maze[x][y] != 3) {
             maze[x][y] = 4;
             i++;

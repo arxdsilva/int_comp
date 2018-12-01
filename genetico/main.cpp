@@ -56,10 +56,17 @@ void main() {
             for(int k = 0; k < population; k++){
                 clearMaze(maze);
                 Xsome xs = newXsome(maze);
-                generationList.push_back(Xsome);
+                generationList.push_back(xs);
             }
         } else {
-            // gen 1,2,...,n
+            for(int i = 0; i < nextGenList.size(); i++){
+                generationList.push_back(nextGenList[i]);
+            }
+            for(int i = nextGenList.size()-1; i < population; i++){
+                clearMaze(maze);
+                Xsome xs = newXsome(maze);
+                generationList.push_back(xs);
+            }            
         }
         Xsome better = betterXsome(generationList);
         cout << ">>         Generation          <<";

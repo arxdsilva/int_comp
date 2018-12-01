@@ -40,7 +40,7 @@ void mutate(Xsome, int [][size]);
 string randGene(int [][size]);
 
 
-void main() {
+int main() {
     int maze[size][size];
     printInfos();
     cout << "entre com a populacao: \n";
@@ -71,7 +71,7 @@ void main() {
         Xsome better = betterXsome(generationList);
         cout << ">>         Generation          <<";
         for(int i = 0; i < better.Vals.size(); i++){
-            cout << ">>     Xsome:"<< better.better.Vals[i] << "            <<";
+            cout << ">>     Xsome:"<< better.Vals[i] << "            <<";
         }
         cout << ">>     eval: " << better.steps << "         <<";
         nextGenList.push_back(better);        
@@ -86,6 +86,7 @@ void main() {
         nextGenList.push_back(tournamentList[0]);
         nextGenList.push_back(tournamentList[1]);
     }
+    return 0;
 }
 
 void mutate(Xsome xs, int maze[][size]) {
@@ -122,12 +123,12 @@ void xOver(Xsome c1, Xsome c2, int maze[][size]) {
     Xsome newC2 = {};
     if (xOverResult < xRate) {
         for(int i = 0; i < xOverPoint; i++){
-            newC1.push_back(c1.Vals[i]);
-            newC2.push_back(c2.Vals[i]);
+            newC1.Vals.push_back(c1.Vals[i]);
+            newC2.Vals.push_back(c2.Vals[i]);
         }
         for(int i = xOverPoint; i < c1.Vals.size(); i++){
-            newC1.push_back(c2.Vals[i]);
-            newC2.push_back(c1.Vals[i]);
+            newC1.Vals.push_back(c2.Vals[i]);
+            newC2.Vals.push_back(c1.Vals[i]);
         }
         setupMazeFromXsome(newC1.Vals, maze);
         c1 = evaluateXsome(newC1.Vals, maze);
@@ -181,7 +182,7 @@ Xsome newXsome(int maze[][size]) {
     genes = inputRandomNodes(genes, maze);
     string lastGene = mountGene(endX, endY);
     genes.push_back(lastGene);
-    Xsome x = evaluateXsome(genes, maze);
+    Xsome xs = evaluateXsome(genes, maze);
     return xs;
 }
 
@@ -197,7 +198,7 @@ Xsome evaluateXsome(std::vector<string> genes, int maze[][size]){
         destY = atoi(destString.substr(3,6).c_str());
         while (maze[destX][destY] == 3) {
             if ((stateXC < destX) && (stateXC+1 < size) && (maze[stateXC+1][stateYC] != 4)) {
-                walkRight(maze, stateXC, stateXY);
+                walkRight(maze, stateXC, stateYC);
                 stateXC += 1;
                 stepz++;
             } else if ((stateYC < destY) && (stateYC+1 < size) && (maze[stateXC][stateYC+1] != 4)) {

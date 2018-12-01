@@ -36,13 +36,52 @@ void walkDown(int [][size], int, int);
 int main() {
     int maze[size][size];
     printInfos();
-    // cout << "entre com a populacao: \n";
-    // cin >> population;
-    // cout << "entre com o numero de geracoes: \n";
-    // cin >> generations;
+    cout << "entre com a populacao: \n";
+    cin >> population;
+    cout << "entre com o numero de geracoes: \n";
+    cin >> generations;
     initMaze(maze);
-    // clearMaze(maze);
-    // 1 cromossomo
+    std::vector<Xsome> nextGenList;
+    for(int i = 0; i < generations; i++){
+        std::vector<Xsome> generationList;
+        std::vector<Xsome> tournamentList;
+        if (i == 0) {
+            for(int k = 0; k < population; k++){
+                clearMaze(maze);
+                Xsome xs = newXsome();
+                generationList.push_back(Xsome);
+            }
+        } else {
+            // gen 1,2,...,n
+        }
+        Xsome better = betterXsome(generationList);
+        cout << ">>         Generation          <<";
+        for(int i = 0; i < better.Vals.size(); i++){
+            cout << ">>     Xsome:"<< better.better.Vals[i] << "            <<";
+        }
+        cout << ">>     eval: " << better.steps << "         <<";
+    }
+    
+
+    cout << x.steps;
+    return 0;
+}
+
+Xsome betterXsome(std::vector<Xsome> Xsomes) {
+    Xsome xs = {};
+    for(int i = 0; i < Xsomes.size(); i++){
+        if (i == 0) {
+            xs = Xsomes[i];
+            continue;
+        }
+        if (xs.steps > Xsomes[i].steps) {
+            xs = Xsomes[i];
+        }
+    }
+    return xs;
+}
+
+Xsome newXsome() {
     std::vector<string> genes;
     string firstGene = mountGene(0,0);
     genes.push_back(firstGene);
@@ -50,8 +89,7 @@ int main() {
     string lastGene = mountGene(endX, endY);
     genes.push_back(lastGene);
     Xsome x = evaluateXsome(genes, maze);
-    cout << x.steps;
-    return 0;
+    return xs;
 }
 
 Xsome evaluateXsome(std::vector<string> genes, int maze[][size]){
@@ -66,8 +104,7 @@ Xsome evaluateXsome(std::vector<string> genes, int maze[][size]){
         destY = atoi(destString.substr(3,6).c_str());
         while (maze[destX][destY] == 3) {
             if ((stateXC < destX) && (stateXC+1 < size) && (maze[stateXC+1][stateYC] != 4)) {
-                maze[stateXC][stateYC] = 0;
-                maze[stateXC+1][stateYC] = 1;
+                walkRight(maze, stateXC, stateXY);
                 stateXC += 1;
                 stepz++;
             } else if ((stateYC < destY) && (stateYC+1 < size) && (maze[stateXC][stateYC+1] != 4)) {
